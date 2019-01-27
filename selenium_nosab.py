@@ -3,10 +3,7 @@ import time
 import xlwt
 
 global record_num
-global delay
-global error_firma_name
 record_num = 1
-delay = 3  # seconds
 driver = webdriver.Firefox()
 book = xlwt.Workbook(encoding="utf-8")
 sheet1 = book.add_sheet("Sheet 1")
@@ -52,7 +49,6 @@ def getInfo(row):
         with open("errors.txt", "a+") as errorfile:
             errorfile.write("Nosab -- ")
             errorfile.write("Hata: getInfo: " + str(e))
-            errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
             errorfile.close()
 
@@ -60,7 +56,6 @@ def getInfo(row):
 def getCompanyPage(j):
     try:
         # /html/body/div[7]/div/div[2]/div[3]/ul/li[1]/a -> /html/body/div[7]/div/div[2]/div[3]/ul/li[2]/a
-        error_firma_name = driver.find_element_by_xpath("/html/body/div[7]/div/div[2]/div[3]/ul/li[" + str(j) + "]/a").text
         driver.find_element_by_xpath("/html/body/div[7]/div/div[2]/div[3]/ul/li[" + str(j) + "]/a").click()
         print("Firma Sayfasina Gidildi: " + str(j))
         timeSleep(4, "getCompanyPage")
@@ -73,14 +68,13 @@ def getCompanyPage(j):
         with open("errors.txt", "a+") as errorfile:
             errorfile.write("Nosab -- ")
             errorfile.write("Hata: getCompanyPage: " + str(e))
-            errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
             errorfile.close()
 
 
 def getCompanies(numbers, page):
     try:
-        for j in range(1, numbers + 1):
+        for j in range(1, numbers):
             getPage(page)  # Sayfalari sirayla cagirma islemi gerceklestiriliyor.
             getCompanyPage(j)
     except Exception as e:
@@ -88,7 +82,6 @@ def getCompanies(numbers, page):
         with open("errors.txt", "a+") as errorfile:
             errorfile.write("Nosab -- ")
             errorfile.write("Hata: getCompanies: " + str(e))
-            errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
             errorfile.close()
 
@@ -97,27 +90,26 @@ def getMainPage():
     try:
         driver.get("http://www.nosab.org.tr/firmalar/tr")
         print("Giris sayfasina gidildi.")
+        print("##########################")
         timeSleep(4, "getMainPage")
     except Exception as e:
         print("Hata: getMainPage: " + str(e))
         with open("errors.txt", "a+") as errorfile:
             errorfile.write("Nosab -- ")
             errorfile.write("Hata: getMainPage: " + str(e))
-            errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
             errorfile.close()
 
 
 def timeSleep(second, function):
     try:
-        print("Sleep: " + str(second) + " Function: " + str(function))
+        # print("Sleep: " + str(second) + " Function: " + str(function))
         time.sleep(second)
     except Exception as e:
         print("Hata: timeSleep: " + str(e))
         with open("errors.txt", "a+") as errorfile:
             errorfile.write("Nosab -- ")
             errorfile.write("Hata: timeSleep: " + str(e))
-            errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
             errorfile.close()
 
@@ -135,7 +127,6 @@ def getNumbers():
         with open("errors.txt", "a+") as errorfile:
             errorfile.write("Nosab -- ")
             errorfile.write("Hata: getNumbers: " + str(e))
-            errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
             errorfile.close()
 
@@ -151,7 +142,6 @@ def getPage(page):
         with open("errors.txt", "a+") as errorfile:
             errorfile.write("Nosab -- ")
             errorfile.write("Hata: getPage: " + str(e))
-            errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
             errorfile.close()
 
@@ -162,6 +152,9 @@ def main():
         for i in range(1, 30):  # A-Z olan sayfalar her firma listesi bittiginde diger sayfaya gecilecek.
             numbers = getNumbers()  # Girilen sayfadaki firma sayfasi donuyor
             print("Total Company This Page: " + str(getNumbers()))
+            print("##########################")
+            if i == 9 or i == 13 or i == 26 or i == 29:
+                continue
             getCompanies(numbers, i)
         driver.close()
     except Exception as e:
@@ -169,7 +162,6 @@ def main():
         with open("errors.txt", "a+") as errorfile:
             errorfile.write("Nosab -- ")
             errorfile.write("Hata: main: " + str(e))
-            errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
             errorfile.close()
 
