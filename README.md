@@ -17,4 +17,4 @@
             - Örnek: C:\Users\uzman\Desktop\selenium_python
 
 - **Konsola Kodu Girin - Selenium Kurulumu**
-    - pip install pip install selenium
+    - pip install selenium
