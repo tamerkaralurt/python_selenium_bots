@@ -50,6 +50,7 @@ def getInfo(row):
     except Exception as e:
         print("Hata: getInfo: " + str(e))
         with open("errors.txt", "a+") as errorfile:
+            errorfile.write("Nosab -- ")
             errorfile.write("Hata: getInfo: " + str(e))
             errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
@@ -70,6 +71,7 @@ def getCompanyPage(j):
     except Exception as e:
         print("Hata: getCompanyPage: " + str(e))
         with open("errors.txt", "a+") as errorfile:
+            errorfile.write("Nosab -- ")
             errorfile.write("Hata: getCompanyPage: " + str(e))
             errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
@@ -84,6 +86,7 @@ def getCompanies(numbers, page):
     except Exception as e:
         print("Hata: getCompanies: " + str(e))
         with open("errors.txt", "a+") as errorfile:
+            errorfile.write("Nosab -- ")
             errorfile.write("Hata: getCompanies: " + str(e))
             errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
@@ -91,14 +94,32 @@ def getCompanies(numbers, page):
 
 
 def getMainPage():
-    driver.get("http://www.nosab.org.tr/firmalar/tr")
-    print("Giris sayfasina gidildi.")
-    timeSleep(4, "getMainPage")
+    try:
+        driver.get("http://www.nosab.org.tr/firmalar/tr")
+        print("Giris sayfasina gidildi.")
+        timeSleep(4, "getMainPage")
+    except Exception as e:
+        print("Hata: getMainPage: " + str(e))
+        with open("errors.txt", "a+") as errorfile:
+            errorfile.write("Nosab -- ")
+            errorfile.write("Hata: getMainPage: " + str(e))
+            errorfile.write(" - Name : " + error_firma_name)
+            errorfile.write("\n")
+            errorfile.close()
 
 
 def timeSleep(second, function):
-    print("Sleep: " + str(second) + " Function: " + str(function))
-    time.sleep(second)
+    try:
+        print("Sleep: " + str(second) + " Function: " + str(function))
+        time.sleep(second)
+    except Exception as e:
+        print("Hata: timeSleep: " + str(e))
+        with open("errors.txt", "a+") as errorfile:
+            errorfile.write("Nosab -- ")
+            errorfile.write("Hata: timeSleep: " + str(e))
+            errorfile.write(" - Name : " + error_firma_name)
+            errorfile.write("\n")
+            errorfile.close()
 
 
 def getNumbers():
@@ -112,6 +133,7 @@ def getNumbers():
     except Exception as e:
         print("Hata: getNumbers: " + str(e))
         with open("errors.txt", "a+") as errorfile:
+            errorfile.write("Nosab -- ")
             errorfile.write("Hata: getNumbers: " + str(e))
             errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
@@ -127,6 +149,7 @@ def getPage(page):
     except Exception as e:
         print("Hata: getPage: " + str(e))
         with open("errors.txt", "a+") as errorfile:
+            errorfile.write("Nosab -- ")
             errorfile.write("Hata: getPage: " + str(e))
             errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
@@ -144,6 +167,7 @@ def main():
     except Exception as e:
         print("Hata: main: " + str(e))
         with open("errors.txt", "a+") as errorfile:
+            errorfile.write("Nosab -- ")
             errorfile.write("Hata: main: " + str(e))
             errorfile.write(" - Name : " + error_firma_name)
             errorfile.write("\n")
