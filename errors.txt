@@ -644,3 +644,7 @@ Nosab -- Hata: getCompanyPage: Message: Unable to locate element: /html/body/div
 
 Nosab -- Hata: getCompanyPage: Message: Unable to locate element: /html/body/div[7]/div/div[2]/div[3]/ul/li[37]/a
 
+Mosb -- Hata: getMainPage: Message: Failed to decode response from marionette
+
+Mosb -- Hata: main: Message: Tried to run command without establishing a connection
+
